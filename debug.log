@@ -1,3 +1,24 @@
 [1201/140857.945:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1202/065424.608:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1202/103047.655:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1203/115519.396:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1207/151619.913:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1207/193113.461:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1208/112454.385:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1208/140859.148:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1211/213400.526:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213400.528:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213400.528:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213400.528:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213526.772:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213526.772:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213526.773:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213526.773:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213600.883:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213600.883:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213600.883:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/213600.883:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/214003.655:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/214003.655:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/214003.655:ERROR:crash_report_database_win.cc(496)] failed to stat report
+[1211/214003.655:ERROR:crash_report_database_win.cc(496)] failed to stat report
