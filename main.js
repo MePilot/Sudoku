@@ -180,7 +180,6 @@ class Sudoku {
     //Hide random numbers in Sudoku board by setting their value to zero
     hideNumbers(showPercent) {
         let show = Math.floor(showPercent*this.SIZE*this.SIZE)
-        console.log(`Hide: ${this.SIZE*this.SIZE-show}`)
         
         for(let i=0;i<this.SIZE;i++) {
             for(let j=0;j<this.SIZE;j++) {
@@ -248,7 +247,7 @@ function printScreen(mat, size) {
             numEl.setAttribute('class', 'dig')
             numEl.setAttribute('onfocus', `this.value=''`)
             numEl.addEventListener('keyup', function(e){
-              if( !e.target.value.match(`[1-${size}]`)) e.target.value=''
+              if(!e.target.value.match(`[1-${size}]`)) e.target.value=''
             });  
 
             if(mat[i][j]!=0) {
@@ -275,7 +274,7 @@ function runGame() {
         game.generateBoard()
         game.hideNumbers(hintPercent)
         c = game.countSolutions(0)
-        if(c!=1) console.log(`Number of solutions: ${c}`)
+        console.log(`Number of solutions: ${c}`)
     }
     while(c!=1)
     
@@ -320,10 +319,12 @@ function checkGame() {
         size=4
         runGame()
     }
+
     function setBoard6x6() {
         size=6
         runGame()
     }
+
     function setBoard9x9() {
         size=9
         runGame()
@@ -334,15 +335,15 @@ function checkGame() {
         runGame()
 
     }
+
     function setGameNormal() {
         hintPercent=0.5
         runGame()
-
     }
-    function setGameHard() {
-        hintPercent=0.38
-        runGame()
 
+    function setGameHard() {
+        hintPercent=0.4
+        runGame()
     }
 
 let game 

@@ -104,7 +104,6 @@
     border-color: yellow;
   }
 
-  
   @keyframes example {
     0%   {opacity: 1;}
     10%   {opacity: 0.9;}
