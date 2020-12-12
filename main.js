@@ -18,7 +18,7 @@ class Sudoku {
         }
     }
     checkAnswer(matAnswer) {
-       
+       //Create an array of coodinates of wrong numbers
         let invalid= []
         for(let i=0;i<this.SIZE*this.SIZE;i++) {
             if(this.matrix[Math.floor(i/this.SIZE)][i%this.SIZE]!=matAnswer[Math.floor(i/this.SIZE)][i%this.SIZE]) {
@@ -29,15 +29,18 @@ class Sudoku {
     }
 
     get size() {
+        //Return the size of matrix 
         return this.SIZE
     }
+
     get hiddenMat() {
+         //Return the matrix with removed numbers
         return this.hiddenMatrix
     }
     //Check if the number is present in given row
-     checkRow(mat,row, num) {
+     checkRow(mat, row, num) {
         if(mat[row].includes(num)) {
-            return false  //The given number is already present in current row, so so it is invalid
+            return false  //The given number is already present in current row, so it is invalid
         }
         return true //The given number is valid
     }
@@ -50,12 +53,12 @@ class Sudoku {
         }
         return true //The given number is valid
     }
-    //Check if the number is present in 3*3 box that contains it (given the number coordinates)
+    //Check if the number is present in a box that contains it (given the number coordinates)
      checkBox(mat,row, col, num) {
         
         let startRow, startCol
 
-        //Calculate the start index of the 3*3 box
+        //Calculate the start index of the box
         startRow = row - row % this.BOX_SIZE
         startCol= col - col % this.BOX_SIZE
         
@@ -70,11 +73,9 @@ class Sudoku {
     
         return true //The given number is valid
     }
-    //Try to generate and return a valid Sudoku number given the coordinates. If it's not possible, return 0 (empty cell)
-    
-    //Try to fill the entire Sudoku board by recursion
+   
     generateBoard() {
-       
+        //Try to generate a valid Sudoku board
         let isComplete=true
         let row, col
         //Check the board. If it's completely filled - return true. If not, remember the last empty space
@@ -88,11 +89,10 @@ class Sudoku {
         }
 
         if(isComplete) {
-            //this.listMat.push(this.matrix)
             return true 
         }
         
-        //Fill the array with numbers 1-9 in random order
+        //Fill the array with numbers in random order
         
         let rndNums = []
         while (rndNums.length<this.SIZE) {
@@ -103,30 +103,26 @@ class Sudoku {
              } 
          }
          
-          //Leave only valid numbers in the array
+          //Leave only valid numbers in the array for given cell
          rndNums=rndNums.filter((num)=>this.checkRow(this.matrix,row, num) && this.checkCol(this.matrix, col, num) && this.checkBox(this.matrix, row,col,num))
          
-         //Try out all the valid numbers from array and see, if they can be placed inside a given cell (by Sudoku rules). Return that legal number
-         let num
-        
+        //Try out all the valid numbers from array
          while(rndNums.length!=0) {
-             num = rndNums.pop()
-             
-                 //Put the legal number into the board
-                this.matrix[row][col] = num
-                 //Recursively call itself with modified board. Finish with true, when it's completely filled
-                if(this.generateBoard()) {return true}
-                 this.matrix[row][col] = 0
-             
+             //Put the legal number into the board
+             this.matrix[row][col] = rndNums.pop()
+            //Recursively call itself with modified board. Finish with true, when it's completely filled
+            if(this.generateBoard()) {
+                return true
             }
+        }
         //When no numbers left in array, it means no number is legal to be placed in a cell
-        
-        return false
+        this.matrix[row][col] = 0  //Assumption was wrong, so reset
+        return false // backtrack
         
         }
 
     countSolutions(count) {
-        
+        //Count the amount of solutions to Sudoku game
          let isComplete=true
          let row, col
          //Check the board. If it's completely filled - return true. If not, remember the last empty space
@@ -140,41 +136,30 @@ class Sudoku {
          }
  
          if(isComplete) {
-             //this.listMat.push(this.matrix)
+             //Sum solutions
              return 1+count
          }
          
-         //Fill the array with numbers 1-9 in random order
+         //Fill the array with numbers in random order
          
          let rndNums = []
-         while (rndNums.length<this.SIZE) {
-             let rndNum = Math.floor(Math.random() * this.SIZE)+1
-             
-             if(!rndNums.includes(rndNum)) {
-                  rndNums.push(rndNum)
-              } 
+        
+          for (let i=1;i<=this.SIZE;i++) {
+            rndNums.push(i)
           }
-           //Exclude the number that is already in matrix from the array
+          //Leave only valid numbers in the array for given cell
           rndNums=rndNums.filter((num)=>this.checkRow(this.hiddenMatrix,row, num) && this.checkCol(this.hiddenMatrix, col, num) && this.checkBox(this.hiddenMatrix,row,col,num))
           
-          //Try out all the numbers from array and see, if they can be placed inside a given cell (by Sudoku rules). Return that legal number
-          let num
-         
+         //Try out all the valid numbers from array
           while(rndNums.length!=0) {
-              num = rndNums.pop()
-              
-                  //Put the legal number into the board
-                 this.hiddenMatrix[row][col] = num
-                  //Recursively call itself with modified board. Finish with true, when it's completely filled
-                 //if(this.generateBoard()) {return true}
-                 count = this.countSolutions(count)
-                  this.hiddenMatrix[row][col] = 0
-              
-             }
+              //Put the legal number into the board
+              this.hiddenMatrix[row][col] = rndNums.pop()
+              //Recursively call itself with modified board. Finish with true, when it's completely filled
+              count = this.countSolutions(count)
+            }
          //When no numbers left in array, it means no number is legal to be placed in a cell
-         
-          
-          return count
+         this.hiddenMatrix[row][col] = 0 //Assumption was wrong, so reset
+          return count //Backtrack
          
      }
     //Hide random numbers in Sudoku board by setting their value to zero
